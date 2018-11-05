@@ -59,7 +59,11 @@
             <div>
             	
             	<a href="cart.php?cart=clear" class="btn btn-large btn-warning pull-left"><i class="icon-arrow-left"></i> Clear cart</a>
-            	<a href="order.php" class="btn btn-large btn-success pull-right">Next <i class="icon-arrow-right"></i></a>
+              <?php if (!empty($_SESSION['user_id'])){ ?>
+              <a href="order.php" class="btn btn-large btn-success pull-right">Place order <i class="icon-arrow-right"></i></a>
+              <?php }else{ ?>
+            	<a href="login.php" class="btn btn-large btn-success pull-right">Login <i class="icon-arrow-right"></i></a>
+              <?php  } ?>
             </div>
             	<?php }else{?>
             		<h3>No items in cart please start adding products from 	<a class="btn btn-small btn-success" href="<?php echo BASE_URL; ?>"> product page </a> </h3>

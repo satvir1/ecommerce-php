@@ -1,4 +1,5 @@
 <?php 
+session_start(); 
 include 'require.php';
 /* Objects*/
 $product = new Products();
@@ -13,7 +14,8 @@ if (!empty($cartItems)) {
 	$cart_total =  $cart->getAttributeTotal('price');
 	$shipping_cost =  $cart->getAttributeTotal('shipping_cost');
 	$pay_amount = $shipping_cost+$cart_total;
-	$order->AddOrder($cartItems,$pay_amount, 0);
+
+	$order->AddOrder($cartItems,$pay_amount, $_SESSION['user_id']);
 	$cart->clear();
 	require 'order_view.php';
 }else{

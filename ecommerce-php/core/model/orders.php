@@ -10,11 +10,16 @@ class Orders
 		$this->db = new Database();
 	}
 
-	// function GetAll()
-	// {
-	// 	$this->db->Query('SELECT * FROM Products');
-	// 	return $this->db->Rows();
-	// }
+	function GetUserOrders($user_id)
+	{
+		$this->db->Query("SELECT * FROM orders WHERE user_id ='$user_id'");
+		return $this->db->Rows();
+	}
+	function GetOrderItems($order_id)
+	{
+		$this->db->Query("SELECT * FROM order_items WHERE order_id ='$order_id'");
+		return $this->db->Rows();
+	}
 	function lastOrderID()
 	{
 		$this->db->Query("SELECT * FROM orders ORDER BY order_id DESC LIMIT 1");

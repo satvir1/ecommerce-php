@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -35,7 +36,9 @@
 <div id="header">
 <div class="container">
 <div id="welcomeLine" class="row">
-	<div class="span6">Welcome!<strong> User</strong></div>
+	<div class="span6">Welcome!<strong>
+		<?php if (!empty($_SESSION['user_id'])){ echo $_SESSION['first_name']." ".$_SESSION['last_name']; }else{ echo "User"; } ?>
+	</strong></div>
 	<div class="span6">
 	<div class="pull-right">
 		<a href="cart.php"><span class="btn btn-mini btn-primary"><i class="icon-shopping-cart icon-white"></i> View cart </span> </a> 
@@ -52,28 +55,15 @@
   <div class="navbar-inner">
     <a class="brand" href="index.php"><img src="themes/images/logo.png" alt="Bootsshop"/></a>
     <ul id="topMenu" class="nav pull-right">
-	 <li class=""><a href="#">Contact</a></li>
-	 <li class="">
-	 <a href="#login" role="button" data-toggle="modal" style="padding-right:0"><span class="btn btn-large btn-success">Login</span></a>
-	<div id="login" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
-		  <div class="modal-header">
-			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-			<h3>Login Block</h3>
-		  </div>
-		  <div class="modal-body">
-			<form class="form-horizontal loginFrm">
-			  <div class="control-group">								
-				<input type="text" id="inputEmail" placeholder="Email">
-			  </div>
-			  <div class="control-group">
-				<input type="password" id="inputPassword" placeholder="Password">
-			  </div>
-			</form>		
-			<button type="submit" class="btn btn-success" href="authentication.php?login=add_single&id=<?= $product['id']; ?>">Sign in</button>
-			<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-		  </div>
-	</div>
-	</li>
+    	<?php if (empty($_SESSION['user_id'])){ ?>
+	 		<li class=""><a href="login.php" style="padding-right:0"><span class="btn btn-large btn-success">Login</span></a></li>
+	 		<li class=""><a href="register.php" style="padding-right:0"><span class="btn btn-large btn-success">Register</span></a></li>
+    	<?php }else{ ?>
+    		<li class=""><a href="profile.php" style="padding-right:0"><span class="btn btn-large btn-success">Edit Profile</span></a></li>
+    		<li class=""><a href="myorders.php" style="padding-right:0"><span class="btn btn-large btn-success">My Orders</span></a></li>
+    		<li class=""><a href="logout.php" style="padding-right:0"><span class="btn btn-large btn-success">Logout</span></a></li>
+    	<?php  } ?>
+
     </ul>
   </div>
 </div>
